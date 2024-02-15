@@ -1,0 +1,10 @@
+#confidential or not relevant
+eval_service.log
+*.csv
+*.txt
+old/
+Discarded*Evals/
+Student*Eval*Reports/
+
+#uploader script
+uploader.sh
