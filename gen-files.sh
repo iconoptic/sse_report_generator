@@ -14,8 +14,22 @@ while getopts 'v' OPTION; do
 	esac
 done
 
-#preprocess: remove newlines
-awk -v ORS= '{sub(/\r$/,"\n")} 1' se.csv > .tmp
+#Pre-process:
+
+#Remove newlines
+if [[ $(tail -n+4 se.csv | grep "^[^0-9]" | wc -l) -gt 0 ]]; then
+	awk -v ORS= '{sub(/\r$/,"\n")} 1' se.csv > .tmp
+	mv .tmp se.csv
+fi
+
+#Survey updated 2/29/2024 -- all previous results will no longer be processed by updated python script
+grep -v "^202[23]" se.csv | while read line; do
+	if test "$(echo "$line" | grep -v "^[2024]" | wc -l)" -eq 1; then
+		echo "$line"
+	elif [[ "$(echo "$line" | cut -d\  -f1)" > "2024-02-29" ]]; then
+		echo "$line"
+	fi
+done > .tmp
 mv .tmp se.csv
 
 fileName=""
