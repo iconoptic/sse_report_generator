@@ -122,7 +122,7 @@ for thisEval in allEvals:
             scale[i].append(likertNum(thisEval[4][i]))
     for i in range(18, 21):
         if thisEval[4][i] != '':
-            sa[i-18].append("**" + thisEval[3] + "**: " + thisEval[4][i]) #append role to saqs
+            sa[i-18].append(thisEval[4][i]) #append role to saqs
     if thisEval[4][17] != '':
         techPie.append(thisEval[4][17])
 #    resI += 1
